@@ -18,3 +18,4 @@ def test_discount_invalid():
 
 def test_tax_default():
     assert add_tax(100) == 118.0
+    
