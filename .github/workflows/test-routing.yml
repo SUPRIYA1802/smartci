@@ -1,0 +1,38 @@
+name: Dynamic Test-Subset Routing
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Select tests
+        id: sel
+        env:
+          BASE_SHA: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          echo "tests=$(python scripts/select_tests.py)" >> "$GITHUB_OUTPUT"
+
+      - name: Run tests
+        run: python -m pytest ${{ steps.sel.outputs.tests }}
+        
