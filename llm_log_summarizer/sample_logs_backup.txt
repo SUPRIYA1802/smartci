@@ -1,0 +1,5 @@
+sample_paths = {
+    "Python Error": BASE_DIR / "sample_logs" / "python_error.log",
+    "Dependency Error": BASE_DIR / "sample_logs" / "dependency_error.log",
+    "Build Failure": BASE_DIR / "sample_logs" / "build_failure.log"
+}

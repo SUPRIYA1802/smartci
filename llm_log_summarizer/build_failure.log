@@ -1,0 +1,6 @@
+src/app.ts:10:25 - error TS2307:
+Cannot find module './BuildReport'
+or its corresponding type declarations.
+
+Found 1 error.
+Build failed.
